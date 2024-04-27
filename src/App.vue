@@ -4,38 +4,41 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/svg/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-      </nav>
-    </div>
+    <!--img alt="Vue logo" class="logo" src="./assets/svg/logo.svg" width="125" height="125" /-->
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+    </nav>
   </header>
-
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  background: var(--color-background-header);
+  height: var(--height-header);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+main {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-md);
 }
 
 nav {
+  position: relative;
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: var(--color-link-active);
 }
 
 nav a.router-link-exact-active:hover {
@@ -45,37 +48,32 @@ nav a.router-link-exact-active:hover {
 nav a {
   display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-paragraph-primary);
 }
 
 nav a:first-of-type {
   border: 0;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
+@media (--laptop) {
   nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+    width: var(--breakpoint-laptop);
+  }
 
-    padding: 1rem 0;
-    margin-top: 1rem;
+  main {
+    padding: var(--spacing-xl) 0;
+    max-width: var(--breakpoint-laptop);
+  }
+}
+
+@media (--desktop) {
+  nav {
+    width: var(--breakpoint-desktop);
+  }
+
+  main {
+    padding: var(--spacing-2xl) 0;
+    max-width: var(--breakpoint-desktop);
   }
 }
 </style>

@@ -1,28 +1,56 @@
 import type { ApiResponse, ArtObject } from '@/model/models'
-import { defineStore } from 'pinia'
+import { defineStore, acceptHMRUpdate } from 'pinia'
+import { buildCollectionRequest } from '@/utils/request'
 
-// https://www.rijksmuseum.nl/api/nl/collection?key=[api-key]&involvedMaker=Rembrandt+van+Rijn
-
+// For some reason, all the values from 1 to 10, are valid, after 10 only dozens values are accepted:
+// for instance, if 15 is provided then a pagination of 20 results is returned.
 export const useCollectionStore = defineStore('collection', {
   state: () => ({
-    collection: [] as ArtObject[]
+    collection: [] as ArtObject[],
+    itemsPerPage: 10,
+    offset: 1,
+    searchValue: '',
+    totalCount: 0,
   }),
   getters: {
-    getCollection: (state): ArtObject[] => state.collection
+    getCollection: (state): ArtObject[] => state.collection,
+    getItemsPerPage: (state): number => state.itemsPerPage,
+    getOffset: (state): number => state.offset,
+    getSearchValue: (state): string => state.searchValue,
+    getTotalCount: (state): number => state.totalCount,
   },
   actions: {
-    async fetchCollection(author: string, offset: number) {
-      const authorName = author.replace(' ', '+')
-      const itemsPerPage = 12
+    async fetchCollection(author: string) {
+      this.offset = 1
+      this.searchValue = author.trim().replace(/ /g, '+')
 
       try {
-        const response = await fetch(`https://www.rijksmuseum.nl/api/nl/collection?key=PQcAbIlL&involvedMaker=${authorName}&ps=${itemsPerPage}&p=${offset}`)
+        const response = await fetch(
+          buildCollectionRequest(this.searchValue, this.itemsPerPage, this.offset),
+        )
         const data = await response.json()
-        console.log(data)
-        this.collection = [...this.collection, ...(data  as unknown as ApiResponse).artObjects]
+        this.collection = [...(data as unknown as ApiResponse).artObjects]
+        this.totalCount = (data as unknown as ApiResponse).count
       } catch (e) {
         console.error(e)
       }
-    }
-  }
+    },
+    async fetchMore() {
+      this.offset++
+
+      try {
+        const response = await fetch(
+          buildCollectionRequest(this.searchValue, this.itemsPerPage, this.offset),
+        )
+        const data = await response.json()
+        this.collection = [...this.collection, ...(data as unknown as ApiResponse).artObjects]
+      } catch (e) {
+        console.error(e)
+      }
+    },
+  },
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useCollectionStore, import.meta.hot))
+}

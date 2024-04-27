@@ -1,0 +1,3 @@
+@custom-media --pad (min-width: 768px);
+@custom-media --laptop (min-width: 1024px);
+@custom-media --desktop (min-width: 1280px);

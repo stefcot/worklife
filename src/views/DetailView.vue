@@ -6,7 +6,7 @@ import { useFavoritesStore } from '@/stores/favorites'
 import { useCollectionStore } from '@/stores/collection'
 
 import type { ArtObject } from '@/model/models'
-import {storeToRefs} from "pinia";
+import {storeToRefs} from 'pinia';
 
 const route = useRoute()
 const router = useRouter()
@@ -14,24 +14,24 @@ const router = useRouter()
 const paramsId = ref<string>(route.params.id as string)
 const artObject = ref<ArtObject>()
 
-// Using cars store (slice ore somme kind)
+// Using collection store (slice ore somme kind)
 const collectionStore = useCollectionStore()
 
 // Setting all store state properties as reactive refs
-const { getCollection } = storeToRefs(collectionStore)
+const { collection } = storeToRefs(collectionStore)
 
 const favoritesStore = useFavoritesStore()
 const { isFavorite } = favoritesStore
 
-artObject.value = getCollection.value.find((item) => {
+artObject.value = collection.value.find((item) => {
   console.log('DetailsView - item:', item, item.id, paramsId)
   return item.id === route.params.id
 })
 
 console.log('DetailsView - route.params.id:', route.params.id)
 console.log('DetailsView - collectionStore:', collectionStore)
-console.log('DetailsView - collectionStore.value:', getCollection.value)
-console.log('DetailsView - getCollection:', getCollection)
+console.log('DetailsView - collectionStore.value:', collection.value)
+console.log('DetailsView - collection:', collection)
 console.log('DetailsView - artObject.value:', artObject.value)
 </script>
 

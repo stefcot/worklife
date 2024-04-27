@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
-
 defineProps({
-  isOpen: Boolean
+  isOpen: Boolean,
 })
 
 const emit = defineEmits(['modal-close'])
-console.log('ModalComponent')
 </script>
 
 <template>
@@ -40,6 +37,7 @@ console.log('ModalComponent')
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal-container {
   width: 300px;
   margin: 150px auto;

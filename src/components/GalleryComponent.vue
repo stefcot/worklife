@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import ModalComponent from '@/components/ModalComponent.vue'
+import ImageComponent from '@/components/ImageComponent.vue'
+
+import HeartIcon from '@/assets/svg/heart.svg'
+import FilledHeartIcon from '@/assets/svg/filed-heart.svg'
 
 import type { ArtObject } from '@/model/models'
 
-import {onMounted, ref} from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
@@ -12,7 +16,7 @@ import { useCollectionStore } from '@/stores/collection'
 
 const router = useRouter()
 
-// Using cars store (slice ore somme kind)
+// Using collection store (slice ore somme kind)
 const collectionStore = useCollectionStore()
 // Setting all store state properties as reactive refs
 const { getCollection } = storeToRefs(collectionStore)
@@ -42,30 +46,37 @@ const submitHandler = () => {
 }
 
 const addArtObjectToFavorites = () => {
-  console.log(isFavorite(selectedArtObject?.value?.id as string))
-  if (isFavorite(selectedArtObject?.value?.id as string)) removeFromFavorites(selectedArtObject?.value?.id as string)
-  else addToFavorites(selectedArtObject?.value?.id  as string)
+  if (isFavorite(selectedArtObject?.value?.id as string))
+    removeFromFavorites(selectedArtObject?.value?.id as string)
+  else addToFavorites(selectedArtObject?.value?.id as string)
 }
 
+// Call the fetch collection action by default if no collection has been searched yet
 onMounted(() => {
-  console.log('GalleryComponent::onMounted')
-  fetchCollection('', 1)
+  if(collection.value.length === 0) fetchCollection('')
 })
-console.log('GalleryComponent')
 </script>
 
 <template>
   <ul>
     <li v-for="artObject in collection" :key="artObject.id" @click="openModal(artObject)">
-      <img :src="artObject.webImage.url">
-      {{ artObject.title }}
+      <h3>{{ artObject.title }}</h3>
+      <ImageComponent v-if="artObject.webImage" :url="artObject.webImage.url" label="Toggle favorite">
+        <template #label>
+          <span class="toggle-favorite-label">
+            Toggle favorite
+            <span v-if="isFavorite(artObject.id)"><FilledHeartIcon class="heart-icon" /></span>
+            <span v-else><HeartIcon class="heart-icon" /></span
+          ></span>
+        </template>
+      </ImageComponent>
     </li>
   </ul>
   <ModalComponent
     :isOpen="isModalOpened"
     :favoriteId="selectedArtObject?.id"
     @modal-close="closeModal"
-    name="cars-modal"
+    name="art-object-modal"
   >
     <template #header>{{ selectedArtObject?.title }}</template>
     <template #content
@@ -75,25 +86,63 @@ console.log('GalleryComponent')
         <span v-else>Like</span>
       </button>
     </template>
-    <template #footer><button class="primary" name="submit" @click="submitHandler()">Go To</button></template>
+    <template #footer
+      ><button class="primary" name="submit" @click="submitHandler()">Go To</button></template
+    >
   </ModalComponent>
 </template>
 
 <style scoped>
 ul {
+  padding: 0;
+  margin: 0;
   display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-lg);
   width: 100%;
 }
 
 li {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: start;
-  background: #E2E8F0;
+  background: var(--vt-c-white);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: var(--spacing-sm);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: var(--spacing-sm);
+}
+
+li h3 {
+  order: 2;
+}
+
+.heart-icon {
+  width: 24px;
+  fill: var(--stone-300);
+}
+
+.toggle-favorite-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--stone-300);
+}
+
+.toggle-favorite-label span {
+  height: 24px;
+}
+
+@media (--laptop) {
+  ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (--desktop) {
+  ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 </style>

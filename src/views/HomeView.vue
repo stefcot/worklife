@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import CarsGalerieComponent from '@/components/GalleryComponent.vue'
-import Wifi from '@/assets/svg/wifi.svg'
-
-console.log('HomeView')
+import GalleryComponent from '@/components/GalleryComponent.vue'
+import SearchComponent from '@/components/SearchComponent.vue'
+import FetchMoreComponent from '@/components/FetchMoreComponent.vue'
 </script>
 
 <template>
-  <main>
-    <h1>Hello</h1>
-    <Wifi style="stroke: #E2E8F0; fill: none; width: 64px" />
-    <CarsGalerieComponent />
-  </main>
+  <SearchComponent />
+  <GalleryComponent />
+  <FetchMoreComponent />
 </template>
