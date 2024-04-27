@@ -1,0 +1,119 @@
+@import 'base.css';
+
+html, body {
+  width: 100vw;
+}
+
+body {
+  background: rgb(30,41,59);
+  background: linear-gradient(180deg, rgba(30,41,59,1) 0%, rgba(71,85,105,1) 100%);
+  margin: 0;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+p {
+  color: #E2E8F0
+}
+
+a {
+  transition: color ease-in 300ms;
+}
+
+a:hover {
+  color: #FB7185;
+  text-decoration: underline;
+}
+
+a, h1, h2, h3 {
+  color: #E11D48;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+}
+
+h4, h5, h6 {
+  color: #FDA4AF;
+  font-weight: 700;
+}
+
+button {
+  appearance: none;
+  display: inline-flex;
+  padding: 0 15px;
+  height: 30px;
+  align-items: center;
+  font-weight: 500;
+  transition: color ease-in 200ms, background-color ease-in 200ms, border ease-in 200ms;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+button.primary {
+  color: #FFFFFF;
+  background-color: #E11D48;
+  border: 1px solid #E11D48;
+}
+
+button.primary:hover {
+  background-color: #FB7185;
+  border: 1px solid #FB7185;
+}
+
+button.secondary {
+  color: #E11D48;
+  background-color: transparent;
+  border: 1px solid #E11D48;
+}
+
+button.secondary:hover {
+  color: #FB7185;
+  border: 1px solid #FB7185;
+}
+
+button.secondary.inverted {
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+}
+
+button.secondary.inverted:hover {
+  color: #E11D48;
+  border: 1px solid #E11D48;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+    color: #FB7185;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem;
+  }
+}
