@@ -1,52 +1,109 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* color palette from tailwind */
 :root {
   --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
   --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
 
-  --vt-c-indigo: #2c3e50;
+  --rose-950: #4C0519;
+  --rose-900: #881337;
+  --rose-800: #9F1239;
+  --rose-700: #BE123C;
+  --rose-600: #E11D48;
+  --rose-500: #F43F5E;
+  --rose-400: #FB7185;
+  --rose-300: #FDA4AF;
+  --rose-200: #FECDD3;
+  --rose-100: #FFE4E6;
+  --rose-50: #FFF1F2;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --stone-950: #0C0A09;
+  --stone-900: #1C1917;
+  --stone-800: #292524;
+  --stone-700: #44403C;
+  --stone-600: #57534E;
+  --stone-500: #78716C;
+  --stone-400: #A8A29E;
+  --stone-300: #D6D3D1;
+  --stone-200: #E7E5E4;
+  --stone-100: #F5F5F4;
+  --stone-50: #FAFAF9;
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --slate-950: #020617;
+  --slate-900: #0F172A;
+  --slate-800: #1E293B;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748B;
+  --slate-400: #94A3B8;
+  --slate-300: #CBD5E1;
+  --slate-200: #E2E8F0;
+  --slate-100: #F1F5F9;
+  --slate-50: #F8FAFC;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  --color-background: var(--slate-200);
+  --color-background-start: var(--slate-300);
+  --color-background-end: var(--slate-200);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  --color-border-primary: var(--stone-900);
+  --color-border-primary-hover: var(--stone-700);
+  --color-background-primary: var(--stone-900);
+  --color-background-primary-hover: var(--stone-700);
+  --color-text-primary: var(--stone-50);
+  --color-text-primary-hover: var(--stone-50);
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-border-secondary: var(--stone-900);
+  --color-border-secondary-hover: var(--stone-700);
+  --color-background-secondary: transparent;
+  --color-background-secondary-hover: transparent;
+  --color-text-secondary: var(--stone-900);
+  --color-text-secondary-hover: var(--stone-700);
 
-  --section-gap: 160px;
+  --color-heading: var(--rose-900);
+  --color-sub-heading: var(--stone-700);
+  --color-paragraph-primary: var(--stone-900);
+  --color-paragraph-secondary: var(--stone-700);
+
+  --gap-xs: var(--spacing-xs);
+  --gap-sm: var(--spacing-sm);
+  --gap-md: var(--spacing-md);
+  --gap-lg: var(--spacing-lg);
+  --gap-xl: var(--spacing-xl);
+  --gap-2xl: var(--spacing-2xl);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    --color-background: var(--slate-200);
+    --color-background-start: var(--slate-300);
+    --color-background-end: var(--slate-200);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+    --color-border-primary: var(--stone-900);
+    --color-border-primary-hover: var(--stone-700);
+    --color-background-primary: var(--stone-900);
+    --color-background-primary-hover: var(--stone-700);
+    --color-text-primary: var(--stone-50);
+    --color-text-primary-hover: var(--stone-50);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-border-secondary: var(--stone-900);
+    --color-border-secondary-hover: var(--stone-700);
+    --color-background-secondary: transparent;
+    --color-background-secondary-hover: transparent;
+    --color-text-secondary: var(--stone-900);
+    --color-text-secondary-hover: var(--stone-700);
+
+    --color-heading: var(--rose-900);
+    --color-sub-heading: var(--stone-700);
+    --color-paragraph-primary: var(--stone-900);
+    --color-paragraph-secondary: var(--stone-700);
   }
 }
 
@@ -60,7 +117,7 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
+  color: var(--color-paragraph-primary);
   background: var(--color-background);
   transition:
     color 0.5s,
