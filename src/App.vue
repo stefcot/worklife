@@ -25,7 +25,7 @@ header {
 }
 
 main {
-  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
   padding: var(--spacing-md);
 }
@@ -62,7 +62,7 @@ nav a:first-of-type {
 
   main {
     padding: var(--spacing-xl) 0;
-    max-width: var(--breakpoint-laptop);
+    width: var(--breakpoint-laptop);
   }
 }
 
@@ -73,7 +73,7 @@ nav a:first-of-type {
 
   main {
     padding: var(--spacing-2xl) 0;
-    max-width: var(--breakpoint-desktop);
+    width: var(--breakpoint-desktop);
   }
 }
 </style>

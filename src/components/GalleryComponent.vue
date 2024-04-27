@@ -19,7 +19,7 @@ const router = useRouter()
 // Using collection store (slice ore somme kind)
 const collectionStore = useCollectionStore()
 // Setting all store state properties as reactive refs
-const { getCollection } = storeToRefs(collectionStore)
+const { getCollection, getItemsPerPage, getFetching } = storeToRefs(collectionStore)
 // Getting actions
 const { fetchCollection } = collectionStore
 
@@ -71,6 +71,9 @@ onMounted(() => {
         </template>
       </ImageComponent>
     </li>
+    <template v-if="getFetching">
+      <li v-for="n in getItemsPerPage" :key="n" class="skeleton" :class="{'fake-height': collection.length === 0}" />
+    </template>
   </ul>
   <ModalComponent
     :isOpen="isModalOpened"
@@ -112,6 +115,26 @@ li {
   border-radius: var(--spacing-sm);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   gap: var(--spacing-sm);
+}
+
+li.skeleton {
+  animation: skeleton-loading 1s infinite;
+}
+
+li.skeleton.fake-height {
+  padding-bottom: 110%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: .8;
+  }
+  50% {
+    opacity: .25;
+  }
+  100% {
+    opacity: .8;
+  }
 }
 
 li h3 {

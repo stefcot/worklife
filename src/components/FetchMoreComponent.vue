@@ -3,7 +3,7 @@
 // Using collection store (slice ore somme kind)
 import { useCollectionStore } from '@/stores/collection'
 import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 // Using collection store (slice ore somme kind)
 const collectionStore = useCollectionStore()
@@ -22,7 +22,7 @@ const handleOnClick = () => {
 </script>
 
 <template>
-<button v-if="displayButton" class="primary" @click="handleOnClick">Fetch morhe</button>
+<button v-if="displayButton" class="primary" @click="handleOnClick">Fetch more</button>
 </template>
 
 <style scoped>
