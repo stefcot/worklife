@@ -46,10 +46,13 @@ const gotoDetails = () => {
   router.push({ name: 'detail', params: { id: selectedArtObject?.value?.id || '' } })
 }
 
-const addArtObjectToFavorites = () => {
-  if (isFavorite(selectedArtObject?.value?.id as string))
-    removeFromFavorites(selectedArtObject?.value?.id as string)
-  else addToFavorites(selectedArtObject?.value?.id as string)
+const toggleFavorites = (id: string) => {
+  if (isFavorite(id)) {
+    removeFromFavorites(id)
+  }
+  else {
+    addToFavorites(id)
+  }
 }
 
 // Call the fetch collection action by default if no collection has been searched yet
@@ -87,7 +90,7 @@ onMounted(() => {
     </template>
     <template #footer
       >
-      <button class="secondary" name="like" @click.stop="addArtObjectToFavorites">
+      <button class="secondary" name="like" @click.stop="toggleFavorites(selectedArtObject?.id as string)">
         <span v-if="selectedArtObject?.id && isFavorite(selectedArtObject?.id)">Remove from favorites</span>
         <span v-else>Add to favorites</span>
       </button>
@@ -112,8 +115,8 @@ li {
   flex-direction: column;
   justify-content: flex-start;
   align-items: start;
-  background: var(--vt-c-white);
   padding: 16px;
+  background: var(--vt-c-white);
   border-radius: var(--spacing-sm);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   gap: var(--spacing-sm);

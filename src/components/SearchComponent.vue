@@ -13,7 +13,6 @@ const searchValue = ref('')
 
 // Call the fetch collection action
 const handleOnClick = () => {
-  console.log('trht hoithor htijt itrptipro opt protuprtu portp uyrpo')
   fetchCollection(searchValue.value)
 }
 </script>
