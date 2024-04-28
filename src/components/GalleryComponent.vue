@@ -1,7 +1,9 @@
 <script setup lang="ts">
+
 import ModalComponent from '@/components/ModalComponent.vue'
 import ImageComponent from '@/components/ImageComponent.vue'
 import ArtObjectModalContentComponent from '@/components/ArtObjectModalContentComponent.vue'
+import ToggleFavoritesComponent from '@/components/ToggleFavoritesComponent.vue'
 
 import HeartIcon from '@/assets/svg/heart.svg'
 import FilledHeartIcon from '@/assets/svg/filed-heart.svg'
@@ -26,7 +28,7 @@ const { fetchCollection } = collectionStore
 
 // Using favorites store (slice or some kind)
 const store = useFavoritesStore()
-const { addToFavorites, removeFromFavorites, isFavorite } = store
+const { isFavorite } = store
 
 // State properties
 const isModalOpened = ref(false)
@@ -44,15 +46,6 @@ const closeModal = () => {
 
 const gotoDetails = () => {
   router.push({ name: 'detail', params: { id: selectedArtObject?.value?.id || '' } })
-}
-
-const toggleFavorites = (id: string) => {
-  if (isFavorite(id)) {
-    removeFromFavorites(id)
-  }
-  else {
-    addToFavorites(id)
-  }
 }
 
 // Call the fetch collection action by default if no collection has been searched yet
@@ -90,10 +83,7 @@ onMounted(() => {
     </template>
     <template #footer
       >
-      <button class="secondary" name="like" @click.stop="toggleFavorites(selectedArtObject?.id as string)">
-        <span v-if="selectedArtObject?.id && isFavorite(selectedArtObject?.id)">Remove from favorites</span>
-        <span v-else>Add to favorites</span>
-      </button>
+      <ToggleFavoritesComponent :favorite-id="selectedArtObject?.id" />
       <button class="primary" @click="gotoDetails()">View details</button>
     </template
     >

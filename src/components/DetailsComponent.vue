@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
+import ImageComponent from '@/components/ImageComponent.vue'
+import ToggleFavoritesComponent from '@/components/ToggleFavoritesComponent.vue'
+
 // Stores
 import { useCollectionStore } from '@/stores/collection'
-import { useFavoritesStore } from '@/stores/favorites'
 
 import type { ArtObject } from '@/model/models'
-import ImageComponent from '@/components/ImageComponent.vue'
 
 // Router features
 const route = useRoute()
@@ -21,27 +22,12 @@ const { getArtObjectDetails, getFetching } = storeToRefs(collectionStore)
 // Setting all store state properties as reactive refs
 const { getDetails } = collectionStore
 
-// Using favorites store (slice or some kind)
-const favoritesStore = useFavoritesStore()
-const { addToFavorites, removeFromFavorites, isFavorite } = favoritesStore
-
 // Setting all store state properties as reactive refs
 const { collection } = storeToRefs(collectionStore)
 
 const getArtObjectFromId = (id: string): ArtObject | undefined => collection.value.find((item) => {
   return item.id === id
 })
-
-const toggleFavorites = (id?: string) => {
-  if(!id) return
-
-  if (isFavorite(id)) {
-    removeFromFavorites(id)
-  }
-  else {
-    addToFavorites(id)
-  }
-}
 
 onMounted(() => {
   const objectNumber = getArtObjectFromId(route.params.id as string)?.objectNumber
@@ -65,10 +51,7 @@ onMounted(() => {
         <div class="categories">
           <span :key="tag.toString()" v-for="tag in getArtObjectDetails.tags" class="tag">{{ tag.toString() }}</span>
         </div>
-        <button class="secondary floating-button" name="like" @click.stop="toggleFavorites(getArtObjectDetails.id)">
-          <span v-if="getArtObjectDetails.id && isFavorite(getArtObjectDetails.id)">Remove from favorites</span>
-          <span v-else>Add to favorites</span>
-        </button>
+        <ToggleFavoritesComponent :favorite-id="getArtObjectDetails.id" extra-class="floating-button" />
       </div>
     </div>
   </div>
@@ -125,9 +108,5 @@ onMounted(() => {
     bottom: unset;
     width: auto;
   }
-}
-
-@media (--desktop) {
-
 }
 </style>
