@@ -16,14 +16,14 @@ import { useCollectionStore } from '@/stores/collection'
 
 const router = useRouter()
 
-// Using collection store (slice ore somme kind)
+// Using collection store (slice or some kind)
 const collectionStore = useCollectionStore()
 // Setting all store state properties as reactive refs
 const { getCollection, getItemsPerPage, getFetching } = storeToRefs(collectionStore)
 // Getting actions
 const { fetchCollection } = collectionStore
 
-// Using favorites store (slice ore somme kind)
+// Using favorites store (slice or some kind)
 const store = useFavoritesStore()
 const { addToFavorites, removeFromFavorites, isFavorite } = store
 
@@ -139,6 +139,9 @@ li.skeleton.fake-height {
 
 li h3 {
   order: 2;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--slate-600);
 }
 
 .heart-icon {

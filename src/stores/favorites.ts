@@ -2,21 +2,21 @@ import { defineStore } from 'pinia'
 
 export const useFavoritesStore = defineStore('favorites', {
   state: () => ({
-    favorites: [] as String[]
+    favorites: [] as string[],
   }),
   getters: {
-    carsLikeStore: (state) => state.favorites,
-    isFavorite: (state) => (favoriteId: String) => !!state.favorites.find((id) => id === favoriteId)
+    getFavorites: (state): string[] => state.favorites,
+    isFavorite: (state) => (favoriteId: string): boolean => !!state.favorites.find((id) => id === favoriteId),
   },
   actions: {
-    addToFavorites(favoriteId: String) {
+    addToFavorites(favoriteId: string) {
       this.favorites.push(favoriteId)
     },
-    removeFromFavorites(favoriteId: String) {
+    removeFromFavorites(favoriteId: string) {
       const index = this.favorites.indexOf(favoriteId)
       if (index > -1) {
         this.favorites.splice(index, 1)
       }
-    }
-  }
+    },
+  },
 })

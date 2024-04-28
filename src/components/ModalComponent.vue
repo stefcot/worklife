@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import CloseIcon from '@/assets/svg/close.svg'
+
 defineProps({
   isOpen: Boolean,
 })
@@ -12,6 +14,7 @@ const emit = defineEmits(['modal-close'])
       <div class="modal-container">
         <div class="modal-header">
           <slot name="header"> default header </slot>
+          <button class="secondary" @click.stop="emit('modal-close')"><CloseIcon/></button>
         </div>
         <div class="modal-body">
           <slot name="content"> default content </slot>
@@ -29,6 +32,9 @@ const emit = defineEmits(['modal-close'])
 
 <style scoped>
 .modal-mask {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -40,7 +46,6 @@ const emit = defineEmits(['modal-close'])
 
 .modal-container {
   width: 300px;
-  margin: 150px auto;
   padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;

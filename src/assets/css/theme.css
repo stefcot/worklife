@@ -53,7 +53,8 @@
   --color-background-start: var(--slate-300);
   --color-background-end: var(--slate-200);
 
-  --color-background-header: var(--rose-950);
+  --color-background-header-start: var(--rose-950);
+  --color-background-header-stop: var(--rose-800);
 
   --color-border-primary: var(--stone-900);
   --color-border-primary-hover: var(--stone-700);
@@ -71,11 +72,23 @@
 
   --color-heading: var(--rose-900);
   --color-sub-heading: var(--stone-700);
+
   --color-link: var(--rose-900);
   --color-link-hover: var(--rose-700);
   --color-link-active: var(--rose-700);
+
   --color-paragraph-primary: var(--stone-900);
   --color-paragraph-secondary: var(--stone-700);
+
+  --color-input-border-hover: var(--stone-400);
+  --color-input-box-shadow-hover: var(--stone-200);
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
 
   --gap-xs: var(--spacing-xs);
   --gap-sm: var(--spacing-sm);
@@ -100,6 +113,9 @@
     --color-background-start: var(--slate-300);
     --color-background-end: var(--slate-200);
 
+    --color-background-header-start: var(--rose-950);
+    --color-background-header-end: var(--rose-800);
+
     --color-border-primary: var(--stone-900);
     --color-border-primary-hover: var(--stone-700);
     --color-background-primary: var(--stone-900);
@@ -116,11 +132,23 @@
 
     --color-heading: var(--rose-900);
     --color-sub-heading: var(--stone-700);
+
     --color-link: var(--rose-900);
     --color-link-hover: var(--rose-700);
     --color-link-active: var(--rose-700);
+
     --color-paragraph-primary: var(--stone-900);
     --color-paragraph-secondary: var(--stone-700);
+
+    --color-input-border-hover: var(--stone-400);
+    --color-input-box-shadow-hover: var(--stone-200);
+
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-md: 16px;
+    --text-lg: 18px;
+    --text-xl: 20px;
+    --text-2xl: 24px;
 
     --gap-xs: var(--spacing-xs);
     --gap-sm: var(--spacing-sm);
@@ -128,5 +156,14 @@
     --gap-lg: var(--spacing-lg);
     --gap-xl: var(--spacing-xl);
     --gap-2xl: var(--spacing-2xl);
+
+    --breakpoint-pad: 768px;
+    --breakpoint-laptop: 1024px;
+    --breakpoint-desktop: 1280px;
+
+    --height-header: 60px;
+
+    --transition-fast: ease-in-out 300ms;
+    --transition-smooth: ease-in-out 300ms;
   }
 }
