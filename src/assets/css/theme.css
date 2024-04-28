@@ -45,6 +45,8 @@
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-2xl: 40px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 56px;
 }
 
 /* semantic color variables for this project */
@@ -96,6 +98,13 @@
   --gap-lg: var(--spacing-lg);
   --gap-xl: var(--spacing-xl);
   --gap-2xl: var(--spacing-2xl);
+
+  --rounded-xs: var(--spacing-xs);
+  --rounded-sm: var(--spacing-sm);
+  --rounded-md: var(--spacing-md);
+  --rounded-lg: var(--spacing-lg);
+  --rounded-xl: var(--spacing-xl);
+  --rounded-2xl: var(--spacing-2xl);
 
   --breakpoint-pad: 768px;
   --breakpoint-laptop: 1024px;

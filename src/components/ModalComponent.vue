@@ -9,47 +9,74 @@ const emit = defineEmits(['modal-close'])
 </script>
 
 <template>
-  <div v-if="isOpen" class="modal-mask">
-    <div class="modal-wrapper">
-      <div class="modal-container">
-        <div class="modal-header">
-          <slot name="header"> default header </slot>
-          <button class="secondary" @click.stop="emit('modal-close')"><CloseIcon/></button>
-        </div>
-        <div class="modal-body">
-          <slot name="content"> default content </slot>
-        </div>
-        <div class="modal-footer">
-          <slot name="footer"> </slot>
-          <div>
-            <button class="secondary" @click.stop="emit('modal-close')">Close</button>
-          </div>
-        </div>
+  <div v-if="isOpen" class="modal-veil" @click.stop="emit('modal-close')">
+    <div class="modal-container">
+      <CloseIcon @click.stop="emit('modal-close')" class="close-icon"/>
+      <div class="modal-body">
+        <slot name="content" />
       </div>
+      <footer>
+        <slot name="footer" />
+      </footer>
     </div>
   </div>
 </template>
 
 <style scoped>
-.modal-mask {
+.modal-veil {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   position: fixed;
-  z-index: 9998;
+  z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  padding: var(--spacing-lg);
 }
 
 .modal-container {
-  width: 300px;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  color: rgba(0, 0, 0, 0.7);
+  position: relative;
+  width: 100%;
+  background-color: var(--stone-50);
+  border-radius: var(--rounded-sm);
+  padding: var(--spacing-4xl) 0 var(--spacing-xl);
+}
+
+.close-icon {
+  position: absolute;
+  width: 24px;
+  fill: var(--stone-800);
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 0 var(--spacing-xl);
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg) var(--spacing-xl) 0;
+  gap: var(--spacing-md);
+}
+
+@media (--desktop) {
+  .modal-veil {
+    align-items: center;
+  }
+
+  .modal-container {
+    width: 800px;
+  }
+
+  footer {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
 }
 </style>

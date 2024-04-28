@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ModalComponent from '@/components/ModalComponent.vue'
 import ImageComponent from '@/components/ImageComponent.vue'
+import ArtObjectModalContentComponent from '@/components/ArtObjectModalContentComponent.vue'
 
 import HeartIcon from '@/assets/svg/heart.svg'
 import FilledHeartIcon from '@/assets/svg/filed-heart.svg'
@@ -41,7 +42,7 @@ const closeModal = () => {
   isModalOpened.value = false
 }
 
-const submitHandler = () => {
+const gotoDetails = () => {
   router.push({ name: 'detail', params: { id: selectedArtObject?.value?.id || '' } })
 }
 
@@ -61,7 +62,7 @@ onMounted(() => {
   <ul>
     <li v-for="artObject in collection" :key="artObject.id" @click="openModal(artObject)">
       <h3>{{ artObject.title }}</h3>
-      <ImageComponent v-if="artObject.webImage" :url="artObject.webImage.url" label="Toggle favorite">
+      <ImageComponent v-if="artObject.webImage" :url="artObject.webImage.url" label="Toggle favorite" enableHover>
         <template #label>
           <span class="toggle-favorite-label">
             Toggle favorite
@@ -81,16 +82,17 @@ onMounted(() => {
     @modal-close="closeModal"
     name="art-object-modal"
   >
-    <template #header>{{ selectedArtObject?.title }}</template>
     <template #content
-      >{{ selectedArtObject?.longTitle }}
-      <button class="primary" name="like" @click.stop="addArtObjectToFavorites">
-        <span v-if="selectedArtObject?.id && isFavorite(selectedArtObject?.id)">DisLike</span>
-        <span v-else>Like</span>
-      </button>
+      ><ArtObjectModalContentComponent :image-url="selectedArtObject?.webImage.url" :title="selectedArtObject?.title" :description="selectedArtObject?.longTitle" />
     </template>
     <template #footer
-      ><button class="primary" name="submit" @click="submitHandler()">Go To</button></template
+      >
+      <button class="secondary" name="like" @click.stop="addArtObjectToFavorites">
+        <span v-if="selectedArtObject?.id && isFavorite(selectedArtObject?.id)">Remove from favorites</span>
+        <span v-else>Add to favorites</span>
+      </button>
+      <button class="primary" @click="gotoDetails()">View details</button>
+    </template
     >
   </ModalComponent>
 </template>

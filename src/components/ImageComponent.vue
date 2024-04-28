@@ -3,7 +3,8 @@ import { ref } from 'vue'
 
 defineProps({
   url: { type: String, required: true },
-  label: { type: String }
+  label: { type: String },
+  enableHover: { type: Boolean },
 })
 
 const hovered = ref(false)
@@ -20,7 +21,7 @@ const handleMouseOut = () => {
 <template>
   <div class="image-container" @mouseover="handleMouseOver" @mouseout="handleMouseOut">
     <img :src="url" />
-    <div class="image-veil" :class="{ 'hovered-class': hovered }">
+    <div v-if="enableHover" class="image-veil" :class="{ 'hovered-class': hovered }">
       <slot name="label" />
     </div>
   </div>
