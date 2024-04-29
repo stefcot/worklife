@@ -45,7 +45,7 @@ input {
 }
 
 input:hover {
-  box-shadow: 0 0 0 1px var(--color-input-border-hover);
+  box-shadow: 0 0 0 2px var(--color-input-border-hover);
 }
 
 input:focus, input:focus-visible {

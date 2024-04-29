@@ -7,6 +7,7 @@ import FavoritesComponent from '@/components/FavoritesComponent.vue'
 <template>
   <header>
     <nav>
+      <img aria-hidden="true" class="rembrant-portrait" alt="Rembrandt" src="./assets/img/133485775-rembrandt-1606-1669-il-était-un-dessinateur-peintre-et-graveur-hollandais-dessin-de-ligne-inverted.jpg" />
       <PaintingIcon class="svg-logo" />
       <RouterLink to="/"><h1 class="site-name">.:: My ARt Gallery //</h1></RouterLink>
       <FavoritesComponent />
@@ -22,6 +23,7 @@ header {
   display: flex;
   align-items: center;
   background: var(--color-background-header-start) linear-gradient(135deg, var(--color-background-header-start) 0%, var(--color-background-header-end) 100%);
+  background-color: var(--color-background-header-start);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   height: var(--height-header);
   overflow: hidden;
@@ -68,6 +70,11 @@ nav a:first-of-type {
   border: 0;
 }
 
+nav h1 {
+  position: relative;
+  z-index: 2;
+}
+
 .svg-logo {
   position: absolute;
   top: 50%;
@@ -85,7 +92,30 @@ nav a:first-of-type {
   height: var(--height-header);
 }
 
+.rembrant-portrait {
+  position: absolute;
+  mix-blend-mode: color-dodge;
+  transition: left var(--transition-smooth), top var(--transition-smooth);
+  top: -230%;
+  left: 30px;
+  transform: scale(.9) rotate(7deg);
+  opacity: .15;
+  width: 100%
+}
+
+@media (--pad) {
+  .rembrant-portrait {
+    top: -490%;
+    left: -50px;
+  }
+}
+
 @media (--laptop) {
+  .rembrant-portrait {
+    top: -540%;
+    left: -50px;
+  }
+
   nav {
     width: var(--breakpoint-laptop);
   }
@@ -98,6 +128,11 @@ nav a:first-of-type {
 }
 
 @media (--desktop) {
+  .rembrant-portrait {
+    top: -680%;
+    left: -50px;
+  }
+
   nav {
     width: var(--breakpoint-desktop);
   }

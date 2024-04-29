@@ -97,7 +97,8 @@ onMounted(() => {
   }
 
   .image {
-    width: 400px;
+    width: unset;
+    flex: 1 0 400px;
   }
 }
 
